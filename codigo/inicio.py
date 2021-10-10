@@ -1,9 +1,11 @@
 import json
+from InsertarCodigo import InsertarCodigo
 
 class Iniciar:
     def __init__(self):
         arcProyecto = open('../guardados/proyecto.json', 'r')
         self.guardado = json.load(arcProyecto)
+        self.insertar = InsertarCodigo()
 
         arcProyecto.close()
 
@@ -20,18 +22,7 @@ class Iniciar:
                 documento = documento + html.replace('<!-- CONTENIDO -->', temp)
 
             else:
-                if componente['contenido']['texto']:
-                    html = html.replace('%== TEXTO ==%', componente['contenido']['texto'])
-
-                if componente['contenido']['src']:
-                    html.replace('%== SRC ==%', componente['contenido']['src'] or '')
-
-                if componente['contenido']['alt']:
-                    html.replace('%== ALT ==%', componente['contenido']['alt'] or '')
-
-                if componente['contenido']['enlace']:
-                    html.replace('%== ENLACE ==%', componente['contenido']['enlace'] or '')
-
+                html = self.insertar.insertarContenido(html, componente['contenido'])
                 documento = documento + html
         
         return documento
