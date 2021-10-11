@@ -2,8 +2,8 @@ import json
 from InsertarCodigo import InsertarCodigo
 
 class Iniciar:
-    def __init__(self):
-        arcProyecto = open('../guardados/proyecto.json', 'r')
+    def __init__(self, proyecto):
+        arcProyecto = open('../guardados/' + proyecto + '.json', 'r')
         self.guardado = json.load(arcProyecto)
         self.insertar = InsertarCodigo()
 
@@ -20,7 +20,6 @@ class Iniciar:
             if componente['tieneComponentes']:
                 temp = self.copiado_recursivo(componente['contenido'], documento=documento)
                 documento = documento + html.replace('<!-- CONTENIDO -->', temp)
-
             else:
                 html = self.insertar.insertarContenido(html, componente['contenido'])
                 documento = documento + html
@@ -40,5 +39,5 @@ class Iniciar:
         self.archivoFinal.write(final)
         self.archivoFinal.close()
 
-programa = Iniciar()
+programa = Iniciar('proyecto')
 programa.compilar('es', 'Prueba')
