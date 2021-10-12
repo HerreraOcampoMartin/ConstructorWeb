@@ -1,16 +1,16 @@
 
 class InsertarCodigo:
-    def insertarContenido(self, html, contenido): 
-        if contenido['texto']:
+    def insertarContenido(self, html, contenido):
+        if "texto" in contenido and contenido['texto']:
             html = html.replace('%== TEXTO ==%', contenido['texto'])
 
-        if contenido['src']:
-            html.replace('%== SRC ==%', contenido['src'] or '')
+        if "src" in contenido and contenido['src']:
+            html = html.replace('%== SRC ==%', contenido['src'])
 
-        if contenido['alt']:
-            html.replace('%== ALT ==%', contenido['alt'] or '')
+        if "alt" in contenido and contenido['alt']:
+            html = html.replace('%== ALT ==%', contenido['alt'])
 
-        if contenido['enlace']:
-            html.replace('%== ENLACE ==%', contenido['enlace'] or '')
+        if "enlace" in contenido and contenido['enlace']:
+            html = html.replace('%== ENLACE ==%', contenido['enlace'])
 
         return html

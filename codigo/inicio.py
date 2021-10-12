@@ -9,7 +9,9 @@ class Iniciar:
 
         arcProyecto.close()
 
-    def copiado_recursivo(self, listado, documento=''):
+    def copiado_recursivo(self, listado):
+        documento = ""
+
         for componente in listado:
             uri = '../componentes/%s/%s.html' % (componente['categoria'], componente['tipo'])
 
@@ -17,14 +19,24 @@ class Iniciar:
             html = htmlArc.read()
             htmlArc.close()
 
-            if componente['tieneComponentes']:
-                temp = self.copiado_recursivo(componente['contenido'], documento=documento)
+            if 'tieneComponentes' in componente and componente["tieneComponentes"]:
+                temp = self.copiado_recursivo(componente['contenido'])
                 documento = documento + html.replace('<!-- CONTENIDO -->', temp)
             else:
                 html = self.insertar.insertarContenido(html, componente['contenido'])
                 documento = documento + html
         
         return documento
+
+    def copiar_css(self):
+        arcCSS = open('../componentes/css/styles.css', 'r')
+        procCSS = open('../procs/css/styles.css', 'w')
+
+        css = arcCSS.read()
+        procCSS.write(css)
+
+        arcCSS.close()
+        procCSS.close()
 
     def compilar(self, idioma, titulo):
         self.archivoFinal = open('../procs/index.html', 'w')
@@ -41,3 +53,4 @@ class Iniciar:
 
 programa = Iniciar('proyecto')
 programa.compilar('es', 'Prueba')
+programa.copiar_css()
