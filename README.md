@@ -3,3 +3,4 @@ La idea de este programa es crear una página web a partir de componentes reutil
 ## Por hacer:
 - Agregar componentes (solo hay disponible títulos, párrafos, imágenes, separadores, videos, videos en Youtube)
 - Agregar componentes básicos para generar barras superiores, pie de página, entre otros.
+- Estilos CSS (Tailwind?)

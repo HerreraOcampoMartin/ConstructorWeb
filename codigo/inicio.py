@@ -3,7 +3,7 @@ from InsertarCodigo import InsertarCodigo
 
 class Iniciar:
     def __init__(self, proyecto):
-        arcProyecto = open('../guardados/' + proyecto + '.json', 'r')
+        arcProyecto = open('./guardados/' + proyecto + '.json', 'r')
         self.guardado = json.load(arcProyecto)
         self.insertar = InsertarCodigo()
 
@@ -13,7 +13,7 @@ class Iniciar:
         documento = ""
 
         for componente in listado:
-            uri = '../componentes/%s/%s.html' % (componente['categoria'], componente['tipo'])
+            uri = './componentes/%s/%s.html' % (componente['categoria'], componente['tipo'])
 
             htmlArc = open(uri, 'r')
             html = htmlArc.read()
@@ -29,8 +29,8 @@ class Iniciar:
         return documento
 
     def copiar_css(self):
-        arcCSS = open('../componentes/css/styles.css', 'r')
-        procCSS = open('../procs/css/styles.css', 'w')
+        arcCSS = open('./componentes/css/styles.css', 'r')
+        procCSS = open('./procs/css/styles.css', 'w')
 
         css = arcCSS.read()
         procCSS.write(css)
@@ -39,8 +39,8 @@ class Iniciar:
         procCSS.close()
 
     def compilar(self, idioma, titulo):
-        self.archivoFinal = open('../procs/index.html', 'w')
-        baseArc = open('../componentes/base.html', 'r')
+        self.archivoFinal = open('./procs/index.html', 'w')
+        baseArc = open('./componentes/base.html', 'r')
         self.base = baseArc.read()
         baseArc.close()
 
